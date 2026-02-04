@@ -1,43 +1,13 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
 
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Player } from '@remotion/player';
 import { KineticTypographyComposition } from './remotion/KineticTypographyComposition';
+import { MatteSciFiComposition } from './remotion/MatteSciFiComposition';
 import { AppState } from './types';
-// ... existing imports ...
-
-// Inside App component
-  const [campaignMode, setCampaignMode] = useState<boolean>(false);
-  
-// ...
-
-            {/* Remotion Player Integration for PAVS Mode */}
-            {luxuryMode && state === AppState.PLAYING && (
-                <div className="w-full h-full animate-in fade-in duration-1000">
-                    <Player
-                        component={campaignMode ? KineticTypographyComposition : MatteSciFiComposition}
-                        durationInFrames={campaignMode ? 1100 : 150}
-                        fps={30}
-                        compositionWidth={1920}
-                        compositionHeight={1080}
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                        }}
-                        controls
-                        inputProps={{
-                            title: inputText || "NotebookLM A to Z",
-                            subtitle: inputStyle?.slice(0, 50) || "Reading Weapon for Non-Readers",
-                            backgroundImage: imageSrc || undefined,
-                        }}
-                    />
-                </div>
-            )}
 import { generateTextImage, generateTextVideo, generateStyleSuggestion } from './services/geminiService';
 import { getRandomStyle, fileToBase64, TYPOGRAPHY_SUGGESTIONS, createGifFromVideo } from './utils';
 import { Loader2, Paintbrush, Clapperboard, Play, ExternalLink, Type, Sparkles, Image as ImageIcon, X, Upload, Download, FileType, Wand2, Volume2, VolumeX, ChevronLeft, ChevronRight, ArrowLeft, Video as VideoIcon, Key, Info, ShieldCheck, ChevronDown, Award } from 'lucide-react';
@@ -172,6 +142,7 @@ const App: React.FC = () => {
   const [state, setState] = useState<AppState>(AppState.IDLE);
   const [viewMode, setViewMode] = useState<'gallery' | 'create'>('gallery');
   const [showKeyDialog, setShowKeyDialog] = useState(false);
+  const [campaignMode, setCampaignMode] = useState<boolean>(false);
 
   const [inputText, setInputText] = useState<string>("");
   const [inputStyle, setInputStyle] = useState<string>("");
